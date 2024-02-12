@@ -11,10 +11,6 @@
         <module name="Employee-service" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="Address-service" target="17" />
-      <module name="Employee-service" target="17" />
-    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">

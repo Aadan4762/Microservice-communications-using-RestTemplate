@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Address-service/Address-service.iml" filepath="$PROJECT_DIR$/Address-service/Address-service.iml" />
-      <module fileurl="file://$PROJECT_DIR$/Employee-service/Employee-service.iml" filepath="$PROJECT_DIR$/Employee-service/Employee-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/RestTemplate communications in Microservice.iml" filepath="$PROJECT_DIR$/.idea/RestTemplate communications in Microservice.iml" />
     </modules>
   </component>

@@ -14,7 +14,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/address")
+@RequestMapping("/v1/address")
 public class AddressController {
 
     @Autowired
@@ -27,7 +27,7 @@ public class AddressController {
         this.addressService = addressService;
     }
 
-    @PostMapping
+    @PostMapping("/create")
     public ResponseEntity <AddressDto> postAddress(@RequestBody AddressDto addressDto){
         //mapping from dto to Entity
         Address addressRequest = modelMapper.map(addressDto, Address.class);
@@ -38,7 +38,7 @@ public class AddressController {
 
     }
 
-    @GetMapping
+    @GetMapping("/all")
     List<AddressDto> getAllAddresses() {
        return addressService.getAllAddress().stream().map(address -> modelMapper.map(address, AddressDto.class))
                .collect(Collectors.toList());

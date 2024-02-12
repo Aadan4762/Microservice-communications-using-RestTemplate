@@ -16,7 +16,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/employees")
+@RequestMapping("/v2/employees")
 public class EmployeeController {
 
     @Autowired
@@ -31,7 +31,7 @@ public class EmployeeController {
         this.employeeService = employeeService;
     }
 
-    @PostMapping
+    @PostMapping("/create")
     public ResponseEntity<EmployeeDto> postEmployee(@RequestBody EmployeeDto employeeDto){
         //mapping from dto to Entity
         Employee employeeRequest = modelMapper.map(employeeDto, Employee.class);
@@ -41,7 +41,7 @@ public class EmployeeController {
         return new ResponseEntity<EmployeeDto>(employeeResponse, HttpStatus.CREATED);
 
     }
-    @GetMapping
+    @GetMapping("/all")
     List<EmployeeDto> getAllEmployees(){
         return employeeService.getAllEmployees().stream().map(employee -> modelMapper.map(employee, EmployeeDto.class))
                 .collect(Collectors.toList());
@@ -53,7 +53,7 @@ public class EmployeeController {
         Employee employee = employeeService.getEmployeeById(id);
         EmployeeDto employeeResponse = modelMapper.map(employee, EmployeeDto.class);
         //RestTemplate call using Address url
-        AddressDto addressDto = restTemplate.getForObject("http://localhost:8081/address-app/api/address/{id}", AddressDto.class, id);
+        AddressDto addressDto = restTemplate.getForObject("http://localhost:8081/address-app/api/v1/address/{id}", AddressDto.class, id);
         employeeResponse.setAddressDto(addressDto);
         return ResponseEntity.ok().body(employeeResponse);
 
