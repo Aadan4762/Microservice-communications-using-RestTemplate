@@ -41,7 +41,7 @@ public class EmployeeController {
         return new ResponseEntity<EmployeeDto>(employeeResponse, HttpStatus.CREATED);
 
     }
-    @GetMapping("/all")
+    @GetMapping
     List<EmployeeDto> getAllEmployees(){
         return employeeService.getAllEmployees().stream().map(employee -> modelMapper.map(employee, EmployeeDto.class))
                 .collect(Collectors.toList());
