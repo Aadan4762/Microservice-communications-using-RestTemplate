@@ -10,6 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Mono;
 
 import java.util.List;
 import java.util.Optional;
@@ -21,8 +23,8 @@ public class EmployeeController {
 
     @Autowired
    private ModelMapper modelMapper;
-    @Autowired
-    private RestTemplate restTemplate;
+   // @Autowired
+   // private RestTemplate restTemplate;
 
     @Autowired
     private EmployeeService employeeService;
@@ -48,14 +50,24 @@ public class EmployeeController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<EmployeeDto> getEmployeeById(@PathVariable("id") int id){
+    public Mono<ResponseEntity<EmployeeDto>> getEmployeeById(@PathVariable("id") int id){
 
         Employee employee = employeeService.getEmployeeById(id);
         EmployeeDto employeeResponse = modelMapper.map(employee, EmployeeDto.class);
+        WebClient webClient = WebClient.create("http://localhost:8081/address-app/api/v1/address");
+
+        return webClient.get()
+                .uri("/{id}", id)
+                .retrieve()
+                .bodyToMono(AddressDto.class)
+                .map(addressDto -> {
+                    employeeResponse.setAddressDto(addressDto);
         //RestTemplate call using Address url
-        AddressDto addressDto = restTemplate.getForObject("http://localhost:8081/address-app/api/v1/address/{id}", AddressDto.class, id);
-        employeeResponse.setAddressDto(addressDto);
+        //AddressDto addressDto = restTemplate.getForObject("http://localhost:8081/address-app/api/v1/address/{id}", AddressDto.class, id);
+        //employeeResponse.setAddressDto(addressDto);
         return ResponseEntity.ok().body(employeeResponse);
+                })
+                .defaultIfEmpty(ResponseEntity.notFound().build());
 
     }
 
