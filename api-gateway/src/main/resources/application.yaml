@@ -17,7 +17,7 @@ spring:
       routes:
 
         - id: employee-service
-          uri: lb://employee-service
+          uri: lb://employee-app
           predicates:
             - Path=/employee-app/api/v2/employees/**
           filters:
@@ -26,7 +26,7 @@ spring:
 
 
         - id: address-service
-          uri: lb://address-service
+          uri: lb://address-app
           predicates:
             - Path=/address-app/api/v1/address/**
           filters:
