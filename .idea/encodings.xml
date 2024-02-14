@@ -3,9 +3,11 @@
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/address-service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/address-service/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/api-gateway/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/config-server/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/employee-service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/employee-service/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/identity-service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/service-registry/src/main/java" charset="UTF-8" />
   </component>
 </project>
